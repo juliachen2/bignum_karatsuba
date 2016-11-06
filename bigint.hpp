@@ -5,6 +5,8 @@
 //  Created by Julia Chen on 11/6/16.
 //  Copyright © 2016 Julia Chen. All rights reserved.
 //
+//  Stores and manipulates large intergers.
+//
 
 #ifndef bigint_hpp
 #define bigint_hpp
@@ -13,49 +15,46 @@
 
 class BigInt{
 public:
-    // empty constructor
+    // Empty constructor
     BigInt();
     
-    // string constructor
+    // String constructor
     BigInt(std::string s);
     
-    // returns length of number
+    // Returns length of number
     size_t get_length();
     
-    // returns number as a string
+    // Returns number as a string
     std::string get_number();
 
-    // reverse the number
+    // Reverses the digits of a number
     void reverse_num();
     
-    // append to number
+    // Appends a string digit to number
     void append_num(std::string);
     
-    // insert at the beginning of number
+    // Inserts a string digit to the "beginning" of number
     void insert_num(std::string);
     
-    // remove from number
+    // Removes a digit/s from a number
     void remove_num(size_t, int);
 
-    // convert a single digit of a number to an integer
+    // Converts a single digit (char) of a number to an integer
     int to_int(int);
     
-    // checks if number of digits is an even number
+    // Checks if the number of digits is even
     bool is_even_length();
     
-    // if number is not even, pad a zero in front
-    void make_even();
-    
-    // pad small number with zeros to the length of the bigger number
+    // Makes two numbers equal in length by padding zeros
     void MakeSameLength(BigInt &);
     
-    // add two numbers together
+    // Add two numbers together
     BigInt AddBigInt(BigInt &);
     
-    // subtract onne number from another
+    // Subtract one number from another
     BigInt SubtractBigInt(BigInt &);
     
-    // multiply two numbers
+    // Multiply two numbers
     BigInt Multiply(BigInt &);
     
 private:

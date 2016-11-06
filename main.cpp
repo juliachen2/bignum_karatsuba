@@ -16,23 +16,25 @@
 
 #include <iostream>
 #include <string>
-#include <algorithm>
 #include <chrono>
 #include "karatsuba.hpp"
 #include "bigint.hpp"
 
 
 int main(int argc, char * argv[]){
-    // numbers to be multiplied
-    std::string str1 = "9999";
-    std::string str2 = "9999";
+    std::string str1, str2;
+
+    // query user for two numbers to multiply
+    std::cout << "~~Karatsuba Multiplication Program~~" << std::endl;
+    std::cout << "Enter the first number: ";
+    std::cin >> str1;
+    std::cout << "Enter the second number: ";
+    std::cin >> str2;
     
     BigInt num1(str1);
     BigInt num2(str2);
-    
-    std::cout << "Multiply " << num1.get_number() << " and " << num2.get_number() << std::endl;
-    
-    // reverse the num strings for easier arithmetic
+        
+    // reverse the num strings for easier digit by digit arithmetic
     num1.reverse_num();
     num2.reverse_num();
     
@@ -43,17 +45,16 @@ int main(int argc, char * argv[]){
     
     // make sure both numbers have an even length
     if(!num1.is_even_length()){
-        num1.make_even();
+        num1.append_num("0");
     }
     if(!num2.is_even_length()){
-        num2.make_even();
+        num2.append_num("0");
     }
-    
 
     // start of the clock
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     
-    // multiply the two numbers
+    // multiply the two numbers using Karatsuba algorithm
     BigInt result = Karatsuba(num1, num2);
     
     // end of the clock
@@ -61,11 +62,11 @@ int main(int argc, char * argv[]){
 
     // flip the string to its original orientation and print result
     result.reverse_num();
-    std::cout << "Product = " << result.get_number() << std::endl;
+    std::cout << "\nProduct = " << result.get_number() << std::endl;
     
     // calculate and display elapsed time of Karatsuba algorithm
     std::chrono::duration<double> elapsed_sec = end - start;
-    std::cout << "\nElapsed time: " << elapsed_sec.count() << "s\n";
+    std::cout << "Elapsed time: " << elapsed_sec.count() << "s\n";
     
     return 0;
 }
